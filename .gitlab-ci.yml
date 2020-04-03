@@ -1,0 +1,94 @@
+---
+stages:
+  - build
+
+ubuntu-18-04:
+  stage: build
+  before_script:
+    - cat /etc/lsb-release
+    - sudo apt update
+    - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python python-six rsync swig systemtap-sdt-dev tzdata uuid-dev
+    - sudo apt install -y libblocksruntime-dev libblocksruntime0
+    - sudo apt install -y unzip
+    - sudo apt install -y python3-distutils
+  script:
+    - echo $PWD
+    - cd ..
+    - swift/utils/update-checkout --clone --skip-repository swift --jobs $(nproc)
+    - swift/utils/build-script --jobs $(nproc) --preset=buildbot_incremental_linux
+  tags:
+    - ubuntu
+    - 18-04
+
+ubuntu-18-04-long:
+  stage: build
+  before_script:
+    - cat /etc/lsb-release
+    - sudo apt update
+    - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python python-six rsync swig systemtap-sdt-dev tzdata uuid-dev
+    - sudo apt install -y libblocksruntime-dev libblocksruntime0
+    - sudo apt install -y unzip
+    - sudo apt install -y python3-distutils
+  script:
+    - echo $PWD
+    - cd ..
+    - swift/utils/update-checkout --clone --skip-repository swift --jobs $(nproc)
+    - swift/utils/build-script --jobs $(nproc) --preset="buildbot_incremental_linux,long_test"
+  tags:
+    - ubuntu
+    - 18-04
+
+ubuntu-19-10:
+  stage: build
+  before_script:
+    - cat /etc/lsb-release
+    - sudo apt update
+    - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python python-six rsync swig systemtap-sdt-dev tzdata uuid-dev
+    - sudo apt install -y libblocksruntime-dev libblocksruntime0
+    - sudo apt install -y unzip
+    - sudo apt install -y python3-distutils
+  script:
+    - echo $PWD
+    - cd ..
+    - swift/utils/update-checkout --clone --skip-repository swift --jobs $(nproc)
+    - swift/utils/build-script --jobs $(nproc) --preset=buildbot_incremental_linux
+  tags:
+    - ubuntu
+    - 19-10
+
+ubuntu-19-10-long:
+  stage: build
+  before_script:
+    - cat /etc/lsb-release
+    - sudo apt update
+    - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python python-six rsync swig systemtap-sdt-dev tzdata uuid-dev
+    - sudo apt install -y libblocksruntime-dev libblocksruntime0
+    - sudo apt install -y unzip
+    - sudo apt install -y python3-distutils
+  script:
+    - echo $PWD
+    - cd ..
+    - swift/utils/update-checkout --clone --skip-repository swift --jobs $(nproc)
+    - swift/utils/build-script --jobs $(nproc) --preset="buildbot_incremental_linux,long_test"
+  tags:
+    - ubuntu
+    - 19-10
+
+ubuntu-20-04:
+  stage: build
+  before_script:
+    - cat /etc/lsb-release
+    - sudo apt update
+    - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython3-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python3 python3-distutils rsync swig systemtap-sdt-dev tzdata uuid-dev
+    - sudo apt install -y libblocksruntime-dev libblocksruntime0
+    - sudo apt install -y unzip
+    - sudo apt install -y python3-distutils
+    - sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 0
+  script:
+    - echo $PWD
+    - cd ..
+    - swift/utils/update-checkout --clone --skip-repository swift --jobs $(nproc)
+    - swift/utils/build-script --jobs $(nproc) --preset=buildbot_incremental_linux
+  tags:
+    - ubuntu
+    - 20-04
