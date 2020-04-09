@@ -24,8 +24,12 @@ import platform
 import re
 import sys
 import time
-import urllib
-import urllib2
+try:
+    from urllib.parse import urlencode
+    from urllib.request import urlopen, Request
+except ImportError:
+    from urllib import urlencode
+    from urllib2 import urlopen, Request
 from collections import namedtuple
 from operator import attrgetter
 
@@ -105,18 +109,18 @@ def write_lnt_values(args):
             json.dump(j, args.output, indent=4)
         else:
             url = args.lnt_submit
-            print "\nsubmitting to LNT server: " + url
+            print("\nsubmitting to LNT server: " + url)
             json_report = {'input_data': json.dumps(j), 'commit': '1'}
-            data = urllib.urlencode(json_report)
-            response_str = urllib2.urlopen(urllib2.Request(url, data))
+            data = urlencode(json_report)
+            response_str = urlopen(Request(url, data))
             response = json.loads(response_str.read())
-            print "### response:"
-            print response
+            print("### response:")
+            print(response)
             if 'success' in response:
-                print "server response:\tSuccess"
+                print("server response:\tSuccess")
             else:
-                print "server response:\tError"
-                print "error:\t", response['error']
+                print("server response:\tError")
+                print("error:\t", response['error'])
                 sys.exit(1)
 
 
@@ -239,16 +243,16 @@ def set_csv_baseline(args):
             print ("updating %d baseline entries in %s" %
                    (len(existing), args.set_csv_baseline))
     else:
-        print "making new baseline " + args.set_csv_baseline
+        print("making new baseline " + args.set_csv_baseline)
     fieldnames = ["epoch", "name", "value"]
-    with open(args.set_csv_baseline, "wb") as f:
+    with open(args.set_csv_baseline, "w") as f:
         out = csv.DictWriter(f, fieldnames, dialect='excel-tab',
                              quoting=csv.QUOTE_NONNUMERIC)
         m = merge_all_jobstats((s for d in args.remainder
                                 for s in load_stats_dir(d, **vargs)),
                                **vargs)
         if m is None:
-            print "no stats found"
+            print("no stats found")
             return 1
         changed = 0
         newepoch = int(time.time())
@@ -265,7 +269,7 @@ def set_csv_baseline(args):
                               name=name,
                               value=int(value)))
         if existing is not None:
-            print "changed %d entries in baseline" % changed
+            print("changed %d entries in baseline" % changed)
     return 0
 
 
@@ -636,7 +640,7 @@ def main():
     modes.add_argument("--set-csv-baseline", type=str, default=None,
                        help="Merge stats from a stats-dir into a CSV baseline")
     modes.add_argument("--compare-to-csv-baseline",
-                       type=argparse.FileType('rb', 0), default=None,
+                       type=argparse.FileType('r'), default=None,
                        metavar="BASELINE.csv",
                        help="Compare stats dir to named CSV baseline")
     modes.add_argument("--compare-stats-dirs",
