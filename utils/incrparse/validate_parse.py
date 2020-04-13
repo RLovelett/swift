@@ -104,7 +104,7 @@ def main():
     except TestFailedError as e:
         print('Test case "%s" of %s FAILed' % (test_case, test_file),
               file=sys.stderr)
-        print(e.message, file=sys.stderr)
+        print(str(e), file=sys.stderr)
         sys.exit(1)
 
     # Check if the two syntax trees are the same

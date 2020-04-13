@@ -55,8 +55,11 @@ def parseLine(line, line_no, test_case, incremental_edit_args, reparse_args,
             if match_test_case == test_case:
                 # Compute the -incremental-edit argument for swift-syntax-test
                 column = len(pre_edit_line) + len(prefix) + 1
+                pre_edit_byte_length = (len(pre_edit.encode(encoding="utf-8"))
+                                        if (sys.version_info > (3, 0))
+                                        else len(pre_edit))
                 edit_arg = '%d:%d-%d:%d=%s' % \
-                    (line_no, column, line_no, column + len(pre_edit),
+                    (line_no, column, line_no, column + pre_edit_byte_length,
                      post_edit)
                 incremental_edit_args.append('-incremental-edit')
                 incremental_edit_args.append(edit_arg)
@@ -108,8 +111,8 @@ def parseLine(line, line_no, test_case, incremental_edit_args, reparse_args,
 def prepareForIncrParse(test_file, test_case, pre_edit_file, post_edit_file,
                         incremental_edit_args, reparse_args):
     with open(test_file, mode='r') as test_file_handle, \
-            open(pre_edit_file, mode='w+b') as pre_edit_file_handle, \
-            open(post_edit_file, mode='w+b') as post_edit_file_handle:
+            open(pre_edit_file, mode='w') as pre_edit_file_handle, \
+            open(post_edit_file, mode='w') as post_edit_file_handle:
 
         current_reparse_start = None
 
