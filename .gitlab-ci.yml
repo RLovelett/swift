@@ -8,7 +8,6 @@ ubuntu-18-04:
     - cat /etc/lsb-release
     - sudo apt update
     - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python python-six rsync swig systemtap-sdt-dev tzdata uuid-dev
-    - sudo apt install -y libblocksruntime-dev libblocksruntime0
     - sudo apt install -y unzip
     - sudo apt install -y python3-distutils
   script:
@@ -26,7 +25,6 @@ ubuntu-18-04-long:
     - cat /etc/lsb-release
     - sudo apt update
     - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python python-six rsync swig systemtap-sdt-dev tzdata uuid-dev
-    - sudo apt install -y libblocksruntime-dev libblocksruntime0
     - sudo apt install -y unzip
     - sudo apt install -y python3-distutils
   script:
@@ -44,7 +42,6 @@ ubuntu-19-10:
     - cat /etc/lsb-release
     - sudo apt update
     - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python python-six rsync swig systemtap-sdt-dev tzdata uuid-dev
-    - sudo apt install -y libblocksruntime-dev libblocksruntime0
     - sudo apt install -y unzip
     - sudo apt install -y python3-distutils
   script:
@@ -62,7 +59,6 @@ ubuntu-19-10-long:
     - cat /etc/lsb-release
     - sudo apt update
     - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python python-six rsync swig systemtap-sdt-dev tzdata uuid-dev
-    - sudo apt install -y libblocksruntime-dev libblocksruntime0
     - sudo apt install -y unzip
     - sudo apt install -y python3-distutils
   script:
@@ -80,7 +76,6 @@ ubuntu-20-04:
     - cat /etc/lsb-release
     - sudo apt update
     - sudo apt install -y clang cmake git icu-devtools libcurl4-openssl-dev libedit-dev libicu-dev libncurses5-dev libpython3-dev libsqlite3-dev libxml2-dev ninja-build pkg-config python3 python3-distutils rsync swig systemtap-sdt-dev tzdata uuid-dev
-    - sudo apt install -y libblocksruntime-dev libblocksruntime0
     - sudo apt install -y unzip
     - sudo apt install -y python3-distutils
     - sudo update-alternatives --install /usr/bin/python python /usr/bin/python3 0
