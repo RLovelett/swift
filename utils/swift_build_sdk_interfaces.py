@@ -101,7 +101,7 @@ def run_command(args, dry_run):
     if dry_run:
         return (0, "", "")
     proc = subprocess.Popen(args, stdout=subprocess.PIPE,
-                            stderr=subprocess.PIPE)
+                            stderr=subprocess.PIPE, encoding="utf-8")
     try:
         out, err = proc.communicate()
         exitcode = proc.returncode
